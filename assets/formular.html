@@ -193,38 +193,17 @@
     <label for="email">7. E-Mail-Adresse <span class="required">*</span></label>
     <input type="email" id="email" name="email" required/>
 
-    <label>8. Weitere Ansprechpartner hinzufügen?</label>
-    <div class="radio-group">
-        <input type="radio" id="add-yes" name="additional" value="yes">
-        <label for="add-yes">Ja</label>
-        <input type="radio" id="add-no" name="additional" value="no" checked>
-        <label for="add-no">Nein</label>
-    </div>
+    <label>8. Kundenkategorie</label>
+    <select id="contact" name="contact" required>
+        <option value="ma">Ma</option>
+        <option value="at">Gao</option>
+        <option value="ch">Dang</option>
+        <option value="be">Ka</option>
+        <option value="viktor">Viktor</option>
+        <option value="umid">Ümid</option>
+        <option value="daniel">Daniel</option>
+    </select>
 
-    <div id="additional-fields" class="conditional">
-        <label>8.1. Anrede (Weitere Ansprechpartner)</label>
-        <div class="radio-group">
-            <input type="radio" id="weitere-frau" name="weitere-anrede" value="Frau">
-            <label for="weitere-frau">Frau</label>
-            <input type="radio" id="weitere-herr" name="weitere-anrede" value="Herr">
-            <label for="weitere-herr">Herr</label>
-        </div>
-
-        <label for="weitere-vorname">8.2. Vorname (Weitere Ansprechpartner)</label>
-        <input type="text" id="weitere-vorname" name="weitere-vorname">
-
-        <label for="weitere-nachname">8.3. Nachname (Weitere Ansprechpartner)</label>
-        <input type="text" id="weitere-nachname" name="weitere-nachname">
-
-        <label for="weitere-telefon">8.4. Telefon (Weitere Ansprechpartner)</label>
-        <input type="text" id="weitere-telefon" name="weitere-telefon">
-
-        <label for="weitere-mobil">8.5. Mobil (Weitere Ansprechpartner)</label>
-        <input type="text" id="weitere-mobil" name="weitere-mobil">
-
-        <label for="weitere-email">8.6. E-Mail-Adresse (Weitere Ansprechpartner)</label>
-        <input type="text" id="weitere-email" name="weitere-email">
-    </div>
     <button type="submit">Absenden</button>
     <div id="response"></div>
 </form>

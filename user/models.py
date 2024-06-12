@@ -12,7 +12,7 @@ class Customer(models.Model):
     country = models.CharField(max_length=30, default="")
     tel = models.CharField(max_length=50, default="")
     email = models.CharField(max_length=100, default="")
-    contact = JSONField(default=dict)
+    contact = models.CharField(max_length=100, default="")
     is_won = models.BooleanField(default=False)
     createdtime = models.DateTimeField(auto_now_add=True)
     updatedtime = models.DateTimeField(auto_now=True)

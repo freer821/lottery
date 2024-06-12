@@ -14,7 +14,6 @@ class CustomerSerializer(serializers.ModelSerializer):
     createdtime = serializers.DateTimeField(format="%Y-%m-%d %H:%M", allow_null=True, required=False)
     updatedtime = serializers.DateTimeField(format="%Y-%m-%d %H:%M", allow_null=True, required=False)
     customer_no = serializers.CharField(required=False)
-    contact = serializers.JSONField(required=False)
     is_won = serializers.BooleanField(required=False)
 
     class Meta:
@@ -28,6 +27,7 @@ class CustomerSerializer(serializers.ModelSerializer):
             'country': {'required': True},
             'tel': {'required': True},
             'email': {'required': True},
+            'contact': {'required': True},
             'is_won': {'required': False}
         }
 
