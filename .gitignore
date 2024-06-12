@@ -1,0 +1,9 @@
+.idea
+.vscode
+**/__pycache__
+**/migrations/**
+frontend/dist/**
+**/node_modules
+resource/**
+*.db
+.DS_Store

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kundendaten Formular</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #f8f9fa, #e0e0e0);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            max-width: 500px;
+            height: 70px;
+            margin-right: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #333;
+            font-size: 36px;
+        }
+
+        form {
+            background: white;
+            width: 80%;
+            max-width: 600px;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="email"],
+        input[type="text"],
+        input[type="radio"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+        }
+
+        .required {
+            color: red;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .radio-group input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .radio-group label {
+            margin-right: 20px;
+            margin-bottom: 0;
+        }
+
+        .conditional {
+            display: none;
+            margin-top: 20px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        #response {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e9ecef;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <img src="static/img/logo.jpeg" alt="Multipunkt">
+</div>
+
+<form id="kundendaten-form">
+    <h2>Kundendaten</h2>
+    <label>1. Anmeldungsart <span class="required">*</span></label>
+    <div class="radio-group">
+        <input type="radio" id="new" name="type" value="new" required/>
+        <label for="new">Neukunde</label>
+        <input type="radio" id="registered" name="type" value="registered" required/>
+        <label for="registered">Ummeldung</label>
+    </div>
+
+    <label for="customer_no">2. Kundennummer <span>(Falls vorhanden)</span></label>
+    <input type="text" id="customer_no" name="customer_no"/>
+
+    <label for="company">3. Firma <span class="required">*</span></label>
+    <input type="text" id="company" name="company" required/>
+
+    <label>4. Anrede <span class="required">*</span></label>
+    <div class="radio-group">
+        <input type="radio" id="female" name="sex" value="female" required/>
+        <label for="female">Frau</label>
+        <input type="radio" id="male" name="sex" value="male" required/>
+        <label for="male">Herr</label>
+    </div>
+
+    <label for="first_name">5. Vorname <span class="required">*</span></label>
+    <input type="text" id="first_name" name="first_name" required/>
+
+    <label for="last_name">6. Nachname <span class="required">*</span></label>
+    <input type="text" id="last_name" name="last_name" required/>
+
+    <label for="company_extra">7. Firmazusatz </label>
+    <input type="text" id="company_extra" name="company_extra"/>
+
+    <label for="addr">8. Straße und Nr. <span class="required">*</span></label>
+    <input type="text" id="addr" name="addr" required/>
+
+    <label for="addr_extra">9. Adresszusatz </label>
+    <input type="text" id="addr_extra" name="addr_extra"/>
+
+    <label for="postcode">10. PLZ. <span class="required">*</span></label>
+    <input type="text" id="postcode" name="postcode" required/>
+
+    <label for="city">11. Ort <span class="required">*</span></label>
+    <input type="text" id="city" name="city" required/>
+
+    <label>12. Land <span class="required">*</span></label>
+    <div class="radio-group">
+        <input type="radio" id="de" name="country" value="de" required/>
+        <label for="de">Deutschland</label>
+        <input type="radio" id="other" name="country" value="other" required/>
+        <label for="other">Sonstiges</label>
+    </div>
+
+    <label for="tel">13. Telefon <span class="required">*</span></label>
+    <input type="text" id="tel" name="tel" required/>
+
+    <label for="fax">14. Fax </label>
+    <input type="text" id="fax" name="fax"/>
+
+    <label for="email">15. E-Mail-Adresse <span class="required">*</span></label>
+    <input type="email" id="email" name="email" required/>
+
+    <label for="bill_email">16. E-Mail-Adresse für Rechnung <span class="required">*</span></label>
+    <input type="email" id="bill_email" name="bill_email" required/>
+
+    <label for="website">17. Webseite </label>
+    <input type="text" id="website" name="website"/>
+
+    <label for="tax_id">18. Steuernummer <span class="required">*</span></label>
+    <input type="text" id="tax_id" name="tax_id" required/>
+
+    <label for="ust_id">19. USt-ID Nr. <span class="required">*</span></label>
+    <input type="text" id="ust_id" name="ust_id" required/>
+
+    <label for="bank">20. Name der Bank </label>
+    <input type="text" id="bank" name="bank"/>
+
+    <label for="iban">21. IBAN </label>
+    <input type="text" id="iban" name="iban"/>
+
+    <label for="bic">22. BIC </label>
+    <input type="text" id="bic" name="bic"/>
+
+    <label>23. Weitere Ansprechpartner hinzufügen?</label>
+    <div class="radio-group">
+        <input type="radio" id="add-yes" name="additional" value="yes">
+        <label for="add-yes">Ja</label>
+        <input type="radio" id="add-no" name="additional" value="no" checked>
+        <label for="add-no">Nein</label>
+    </div>
+
+    <div id="additional-fields" class="conditional">
+        <label>24. Anrede (Weitere Ansprechpartner)</label>
+        <div class="radio-group">
+            <input type="radio" id="weitere-frau" name="weitere-anrede" value="Frau">
+            <label for="weitere-frau">Frau</label>
+            <input type="radio" id="weitere-herr" name="weitere-anrede" value="Herr">
+            <label for="weitere-herr">Herr</label>
+        </div>
+
+        <label for="weitere-vorname">25. Vorname (Weitere Ansprechpartner)</label>
+        <input type="text" id="weitere-vorname" name="weitere-vorname">
+
+        <label for="weitere-nachname">26. Nachname (Weitere Ansprechpartner)</label>
+        <input type="text" id="weitere-nachname" name="weitere-nachname">
+
+        <label for="weitere-telefon">27. Telefon (Weitere Ansprechpartner)</label>
+        <input type="text" id="weitere-telefon" name="weitere-telefon">
+
+        <label for="weitere-mobil">28. Mobil (Weitere Ansprechpartner)</label>
+        <input type="text" id="weitere-mobil" name="weitere-mobil">
+
+        <label for="weitere-email">29. E-Mail-Adresse (Weitere Ansprechpartner)</label>
+        <input type="text" id="weitere-email" name="weitere-email">
+    </div>
+    <button type="submit">Absenden</button>
+    <div id="response"></div>
+</form>
+
+<script>
+    document.getElementById('kundendaten-form').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const data = {
+            "type": form.type.value,
+            "customer_no": form.customer_no.value,
+            "company": form.company.value,
+            "sex": form.sex.value,
+            "first_name": form.first_name.value,
+            "last_name": form.last_name.value,
+            "company_extra": form.company_extra.value,
+            "addr": form.addr.value,
+            "addr_extra": form.addr_extra.value,
+            "city": form.city.value,
+            "postcode": form.postcode.value,
+            "country": form.country.value,
+            "tel": form.tel.value,
+            "fax": form.fax.value,
+            "email": form.email.value,
+            "bill_email": form.bill_email.value,
+            "website": form.website.value,
+            "tax_id": form.tax_id.value,
+            "ust_id": form.ust_id.value,
+            "bank": form.bank.value,
+            "iban": form.iban.value,
+            "bic": form.bic.value,
+        };
+
+        if (form.additional.value === 'yes') {
+            data.contact = {
+                "sex": form['weitere-anrede'].value,
+                "first_name": form['weitere-vorname'].value,
+                "last_name": form['weitere-nachname'].value,
+                "tel": form['weitere-telefon'].value,
+                "mobil": form['weitere-email'].value,
+                "email": form['weitere-email'].value,
+            };
+        }
+
+        try {
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
+                mode: 'no-cors'
+            });
+
+            const result = await response.json();
+            alert(JSON.stringify(result));
+            form.reset();
+            document.getElementById('additional-fields').style.display = 'none';
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+    });
+
+    document.querySelectorAll('input[name="additional"]').forEach((input) => {
+        input.addEventListener('change', function () {
+            const additionalFields = document.getElementById('additional-fields');
+            if (this.value === 'yes') {
+                additionalFields.style.display = 'block';
+            } else {
+                additionalFields.style.display = 'none';
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>
