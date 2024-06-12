@@ -220,19 +220,10 @@
             "last_name": form.last_name.value,
             "country": form.country.value,
             "tel": form.tel.value,
-            "email": form.email.value
-        };
+            "email": form.email.value,
+            "contact": form.contact.value
 
-        if (form.additional.value === 'yes') {
-            data.contact = {
-                "sex": form['weitere-anrede'].value,
-                "first_name": form['weitere-vorname'].value,
-                "last_name": form['weitere-nachname'].value,
-                "tel": form['weitere-telefon'].value,
-                "mobil": form['weitere-email'].value,
-                "email": form['weitere-email'].value,
-            };
-        }
+        };
 
         try {
             const response = await fetch('/api/register', {
