@@ -4,6 +4,7 @@ from django.db.models import JSONField
 
 # Create your models here.
 class Customer(models.Model):
+    customer_no = models.CharField(max_length=80, unique=True, blank=True, null=True)
     company = models.CharField(max_length=80, default="")
     sex = models.CharField(max_length=20, default="")
     first_name = models.CharField(max_length=100, default="")
