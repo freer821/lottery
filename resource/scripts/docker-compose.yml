@@ -1,0 +1,44 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: Qwer1234@
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@postgres.dev
+      PGADMIN_DEFAULT_PASSWORD: Qwer1234@
+      PGADMIN_LISTEN_PORT: 80
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "9181:80"
+    links:
+      - db:pgsql-server
+
+  lottery:
+    image: owm
+    restart: always
+    container_name: owm_dmk
+    environment:
+      - SYS_ENV=prod
+    ports:
+      - "9101:80"
+    volumes:
+      - /Users/zhenyugeng/work/zge/dev/lottery/:/home/docker/code/app
+
+volumes:
+  postgres-db:
+  pgadmin-data:

@@ -1,0 +1,12 @@
+asgiref==3.8.1
+cffi==1.16.0
+cryptography==42.0.8
+Django==5.0.6
+django-cors-headers==4.3.1
+django-filter==24.2
+djangorestframework==3.15.1
+psycopg2-binary==2.9.9
+pycparser==2.22
+setuptools==69.5.1
+sqlparse==0.5.0
+wheel==0.43.0

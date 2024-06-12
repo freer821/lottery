@@ -4,6 +4,6 @@
 **/migrations/**
 frontend/dist/**
 **/node_modules
-resource/**
+resource/logs
 *.db
 .DS_Store
