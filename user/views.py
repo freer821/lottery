@@ -1,7 +1,7 @@
 import django_filters
 from rest_framework import viewsets
 from rest_framework.authentication import BasicAuthentication
-from rest_framework.decorators import api_view, permission_classes, action
+from rest_framework.decorators import api_view, action, authentication_classes
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
@@ -12,6 +12,7 @@ from user.serializers import CustomerSerializer
 
 
 @api_view(['POST'])
+@authentication_classes([])  # No authentication for this view
 def register(request):
     data = JSONParser().parse(request)
     serializer = CustomerSerializer(data=data)

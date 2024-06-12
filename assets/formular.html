@@ -235,23 +235,16 @@
             });
 
             const result = await response.json();
-            alert(JSON.stringify(result));
+
+            if (result.status === 200) {
+                alert("Congratulation, you have submitted this form successfully!")
+            } else {
+                throw result.msg
+            }
             form.reset();
-            document.getElementById('additional-fields').style.display = 'none';
         } catch (error) {
             alert('Error: ' + error.message);
         }
-    });
-
-    document.querySelectorAll('input[name="additional"]').forEach((input) => {
-        input.addEventListener('change', function () {
-            const additionalFields = document.getElementById('additional-fields');
-            if (this.value === 'yes') {
-                additionalFields.style.display = 'block';
-            } else {
-                additionalFields.style.display = 'none';
-            }
-        });
     });
 
 </script>
