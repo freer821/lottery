@@ -235,28 +235,13 @@
 
         const form = event.target;
         const data = {
-            "type": form.type.value,
-            "customer_no": form.customer_no.value,
             "company": form.company.value,
             "sex": form.sex.value,
             "first_name": form.first_name.value,
             "last_name": form.last_name.value,
-            "company_extra": form.company_extra.value,
-            "addr": form.addr.value,
-            "addr_extra": form.addr_extra.value,
-            "city": form.city.value,
-            "postcode": form.postcode.value,
             "country": form.country.value,
             "tel": form.tel.value,
-            "fax": form.fax.value,
-            "email": form.email.value,
-            "bill_email": form.bill_email.value,
-            "website": form.website.value,
-            "tax_id": form.tax_id.value,
-            "ust_id": form.ust_id.value,
-            "bank": form.bank.value,
-            "iban": form.iban.value,
-            "bic": form.bic.value,
+            "email": form.email.value
         };
 
         if (form.additional.value === 'yes') {
@@ -276,8 +261,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data),
-                mode: 'no-cors'
+                body: JSON.stringify(data)
             });
 
             const result = await response.json();
