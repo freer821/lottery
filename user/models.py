@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import JSONField
 
 
 # Create your models here.
@@ -11,7 +10,7 @@ class Customer(models.Model):
     last_name = models.CharField(max_length=100, default="")
     country = models.CharField(max_length=30, default="")
     tel = models.CharField(max_length=50, default="")
-    email = models.CharField(max_length=100, default="")
+    email = models.EmailField(max_length=150, unique=True, blank=True, null=True)
     contact = models.CharField(max_length=100, default="")
     is_won = models.BooleanField(default=False)
     createdtime = models.DateTimeField(auto_now_add=True)
