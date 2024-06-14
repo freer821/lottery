@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Table Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://source.unsplash.com/random/1920x1080') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container, .table-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 80%;
+            margin: auto;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .login-footer {
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin: auto;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #333;
+            color: #fff;
+        }
+
+        td {
+            background: #f9f9f9;
+        }
+
+        tr:nth-child(even) td {
+            background: #fff;
+        }
+
+        .delete {
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<script src="static/lib/ajax.js"></script>
+
+<div id="loginDiv" class="login-container visible">
+    <h2>Account Login</h2>
+    <form id="loginForm">
+        <input type="text" id="username" name="username" placeholder="Email" required>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <button type="submit">SIGN IN</button>
+    </form>
+</div>
+
+<div id="tableDiv" class="table-container hidden">
+    <h2>Customers</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Kunden Nr.</th>
+            <th>Firma</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Land</th>
+            <th>Telefon</th>
+            <th>Email</th>
+            <th>Ansprechpartner</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody id="tableBody">
+        <!-- Table rows will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    var ACCESS_TOKEN = "";
+    const loginForm = document.getElementById('loginForm');
+    const loginDiv = document.getElementById('loginDiv');
+    const tableDiv = document.getElementById('tableDiv');
+    const tableBody = document.getElementById('tableBody');
+
+    loginForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Simulate login verification
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (username && password) {
+            loginServer({
+                type: 'POST',
+                url: "/api/login",
+                success(response) {
+                    if (response.status === 200) {
+                        ACCESS_TOKEN = response.data.token
+                        loginDiv.classList.replace('visible', 'hidden');
+                        tableDiv.classList.replace('hidden', 'visible');
+                        displayTable();
+                    } else {
+                        alert('wrong password and username')
+                    }
+                }
+            }, username, password);
+        } else {
+            alert('Invalid username or password');
+        }
+    });
+
+    function displayTable() {
+        window.AJAX({
+            type: 'GET',
+            url: "/api/customers",
+            success(response) {
+                console.log(response);
+                response.data.results.forEach(customer => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                    <td>${customer.customer_no}</td>
+                    <td>${customer.company}</td>
+                    <td>${customer.first_name}</td>
+                    <td>${customer.last_name}</td>
+                    <td>${customer.country}</td>
+                    <td>${customer.tel}</td>
+                    <td>${customer.email}</td>
+                    <td>${customer.contact}</td>
+                    <td>${customer.is_won ? 'gewonnen':'normal'}</td>
+                `;
+                    tableBody.appendChild(tr);
+                })
+            }
+        }, ACCESS_TOKEN);
+
+    };
+
+    function deleteRow(element) {
+        const row = element.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+    }
+</script>
+</body>
+</html>
