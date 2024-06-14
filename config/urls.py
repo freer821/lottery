@@ -20,6 +20,6 @@ from user.urls import urlpatterns as api_user_urls
 
 urlpatterns = [
     path('signup', TemplateView.as_view(template_name='formular.html'), name='formular'),
-    path('lottery', TemplateView.as_view(template_name='index.html'), name='lottery'),
+    # path('lottery', TemplateView.as_view(template_name='index.html'), name='lottery'),
     path('api/', include(api_user_urls))
 ]
